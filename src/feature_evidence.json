@@ -1,0 +1,110 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-text-input-interactive-fiction-game-ui-where-the-player-can-type-freeform-responses-and-progress-through-a-date-story-with-a-grumpy-uptight-gumball-machine-headed-park-manager-character-inspired-by-the-user-s-request-for-benson-dunwoody-showing-detailed-opening-narration-and-detailed-in-game-responses-after-each-player-input",
+      "featureTitle": "Create a text-input interactive fiction game UI where the player can type freeform responses and progress through a date story with a grumpy, uptight, gumball machine–headed park manager character (inspired by the user’s request for Benson Dunwoody), showing detailed opening narration and detailed in-game responses after each player input.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/GameTranscript.tsx",
+        "frontend/src/components/PlayerInput.tsx",
+        "frontend/src/game/initialNarration.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-deterministic-offline-response-generation-no-external-ai-calls-that-produces-context-aware-branching-responses-based-on-the-player-s-input-including-tone-management-for-the-character-e-g-easily-annoyed-rule-focused-but-capable-of-warmth-and-maintaining-consistent-continuity-across-turns",
+      "featureTitle": "Implement deterministic, offline response generation (no external AI calls) that produces context-aware branching responses based on the player’s input, including tone management for the character (e.g., easily annoyed, rule-focused, but capable of warmth) and maintaining consistent continuity across turns.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/game/inputClassifier.ts",
+        "frontend/src/game/responseEngine.ts",
+        "frontend/src/game/storyBeats.ts",
+        "frontend/src/game/types.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-optional-character-setting-panel-or-modal-that-describes-the-character-s-appearance-and-mannerisms-in-original-wording-not-copied-from-any-source-and-does-not-claim-to-be-sourced-from-online-lookup-keep-the-character-name-configurable-in-ui-default-to-an-original-name-to-avoid-hard-dependency-on-copyrighted-ip",
+      "featureTitle": "Add an optional “Character & Setting” panel (or modal) that describes the character’s appearance and mannerisms in original wording (not copied from any source) and does not claim to be sourced from online lookup; keep the character name configurable in UI (default to an original name) to avoid hard dependency on copyrighted IP.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/CharacterSettingDialog.tsx",
+        "frontend/src/game/characterCopy.ts",
+        "frontend/src/game/responseEngine.ts",
+        "frontend/src/hooks/useGameSettings.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-coherent-distinctive-visual-theme-for-the-game-typography-color-palette-layout-consistent-across-screens-and-components-suitable-for-a-playful-retro-interactive-fiction-vibe-avoid-default-blue-purple-heavy-styling",
+      "featureTitle": "Apply a coherent, distinctive visual theme for the game (typography, color palette, layout) consistent across screens and components, suitable for a playful retro interactive-fiction vibe (avoid default blue/purple-heavy styling).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-images-to-the-project-and-render-them-in-the-ui-e-g-character-portrait-and-a-scene-header-background-from-frontend-public-assets-generated-do-not-serve-images-from-the-backend",
+      "featureTitle": "Add generated static images to the project and render them in the UI (e.g., character portrait and a scene/header background) from frontend/public/assets/generated; do not serve images from the backend.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/CharacterPortrait.tsx",
+        "frontend/src/components/GameHeader.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

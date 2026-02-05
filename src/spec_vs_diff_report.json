@@ -1,0 +1,70 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-05T21:04:16.694Z",
+  "summary": "Most frontend requirements (REQ-1..REQ-4) appear implemented: interactive text-input transcript with restart, deterministic branching response engine with state/endings, configurable character info modal, and a coherent warm retro theme. The diff does not provide direct evidence that the required static images were added under frontend/public/assets/generated, although the UI references them. The diff also includes new/changed code in paths that were explicitly marked immutable, and adds an unused backend character-response API that was not requested by the BuildRequest.",
+  "missing_requirements": [
+    {
+      "id": "REQ-5",
+      "requirement": "Add generated static images to the project under frontend/public/assets/generated and render them in the UI (do not serve images from backend).",
+      "reason": "The UI references the required image paths, but the diff summary does not include evidence that the actual image files were added under frontend/public/assets/generated (the added files list shows only code files; omitted files are unspecified).",
+      "evidence": [
+        "frontend/src/components/CharacterPortrait.tsx",
+        "frontend/src/components/GameHeader.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added/modified code under frontend immutable paths (useInternetIdentity, useActor, main.tsx), despite the constraint to not edit these files.",
+      "reason": "BuildRequest constraints explicitly say not to edit these paths, but the diff shows new content at these exact file locations.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/main.tsx"
+      ]
+    },
+    {
+      "description": "Backend Motoko actor adds askCharacter/history APIs and tone logic that are not used by the frontend’s deterministic local response engine.",
+      "reason": "REQ-2 asks for deterministic offline response generation; the frontend implements it locally (responseEngine). The backend askCharacter/getHistory/clearHistory endpoints and tone types are extra functionality not requested and not evidenced as integrated.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/game/responseEngine.ts"
+      ]
+    },
+    {
+      "description": "Footer includes external promotional link (caffeine.ai).",
+      "reason": "Not requested by any requirement and adds unrelated external-link UI content.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.63,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CharacterPortrait.tsx",
+    "frontend/src/components/CharacterSettingDialog.tsx",
+    "frontend/src/components/GameHeader.tsx",
+    "frontend/src/components/GameTranscript.tsx",
+    "frontend/src/components/PlayerInput.tsx",
+    "frontend/src/game/characterCopy.ts",
+    "frontend/src/game/initialNarration.ts",
+    "frontend/src/game/inputClassifier.ts",
+    "frontend/src/game/responseEngine.ts",
+    "frontend/src/game/storyBeats.ts",
+    "frontend/src/game/types.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useGameSettings.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

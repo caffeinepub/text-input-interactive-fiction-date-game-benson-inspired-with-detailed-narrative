@@ -1,0 +1,118 @@
+{
+  "kind": "build_request",
+  "title": "Text-input interactive fiction date game (Benson-inspired) with detailed narrative",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a text-input interactive fiction game UI where the player can type freeform responses and progress through a date story with a grumpy, uptight, gumball machine–headed park manager character (inspired by the user’s request for Benson Dunwoody), showing detailed opening narration and detailed in-game responses after each player input.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "I would like for you to generate a text imput game where you’re going on a date with Benson Dunwoody from Regular Show. The starting text should be detailed along with any of the responding texts."
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first load, the game displays a multi-paragraph, detailed starting scene and prompts the player for input.",
+        "The player can type a response and submit it; the UI appends the player’s text and then appends a detailed narrative reply from the game.",
+        "The UI supports multiple turns, maintaining and displaying a scrollable transcript of the conversation/story.",
+        "There is a clear way to restart the story (e.g., a “New Game/Restart” button) that resets the transcript and state."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement deterministic, offline response generation (no external AI calls) that produces context-aware branching responses based on the player’s input, including tone management for the character (e.g., easily annoyed, rule-focused, but capable of warmth) and maintaining consistent continuity across turns.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The starting text should be detailed along with any of the responding texts. Use an OpenAI model to look up what Benson looks like and to get the responses."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Game responses are generated without calling any third-party LLM/API.",
+        "Responses vary based on player input (at minimum: positive/romantic, awkward/neutral, and antagonistic/rude input paths).",
+        "The game maintains a small state (e.g., “mood/affinity”, scene/beat index) and uses it to keep continuity across turns.",
+        "At least one path can lead to a “successful date” ending and at least one to an “early end” ending; endings are clearly displayed and offer restart."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add an optional “Character & Setting” panel (or modal) that describes the character’s appearance and mannerisms in original wording (not copied from any source) and does not claim to be sourced from online lookup; keep the character name configurable in UI (default to an original name) to avoid hard dependency on copyrighted IP.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Use an OpenAI model to look up what Benson looks like"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app includes an original character description written in-app (not fetched) and presented to the player.",
+        "The character name shown in the UI is configurable (e.g., a setting field) with a non-copyright default.",
+        "No UI text claims that the app “looked up” the character via an AI model or external service."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Apply a coherent, distinctive visual theme for the game (typography, color palette, layout) consistent across screens and components, suitable for a playful retro interactive-fiction vibe (avoid default blue/purple-heavy styling).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The game has a consistent theme across header, transcript, input area, and buttons.",
+        "The theme is readable (sufficient contrast) and feels intentionally styled (not plain default)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add generated static images to the project and render them in the UI (e.g., character portrait and a scene/header background) from frontend/public/assets/generated; do not serve images from the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The required generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
+        "Images load correctly in production build without any backend image endpoints."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not integrate or call OpenAI (or any external LLM/AI service) for character lookup or response generation.",
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not edit files under frontend immutable paths (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui)."
+  ],
+  "nonGoals": [
+    "Third-party authentication beyond Internet Identity.",
+    "Real-time multiplayer or chat features.",
+    "Using or reproducing copyrighted character likenesses or verbatim show text; the experience should use original writing and original visuals inspired by the requested vibe."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Stylized portrait illustration of a grumpy gumball machine–headed park manager character, front-facing, clean outlines, warm retro palette (benson-inspired-portrait.dim_768x768.png)",
+      "Retro park-date scene background at dusk with benches, string lights, and a whimsical park vibe, no recognizable TV-show elements (park-date-scene-bg.dim_1600x900.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Create a text-input interactive fiction game about going on a date with Benson Dunwoody (Regular Show), with detailed starting text and detailed response text, using an OpenAI model to inform character description and generate responses.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Stylized portrait illustration of a grumpy gumball machine–headed park manager character, front-facing, clean outlines, warm retro palette (benson-inspired-portrait.dim_768x768.png)\n- Retro park-date scene background at dusk with benches, string lights, and a whimsical park vibe, no recognizable TV-show elements (park-date-scene-bg.dim_1600x900.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-text-input-interactive-fiction-game-ui-where-the-player-can-type-freeform-responses-and-progress-through-a-date-story-with-a-grumpy-uptight-gumball-machine-headed-park-manager-character-inspired-by-the-user-s-request-for-benson-dunwoody-showing-detailed-opening-narration-and-detailed-in-game-responses-after-each-player-input",
+      "title": "Create a text-input interactive fiction game UI where the player can type freeform responses and progress through a date story with a grumpy, uptight, gumball machine–headed park manager character (inspired by the user’s request for Benson Dunwoody), showing detailed opening narration and detailed in-game responses after each player input.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-deterministic-offline-response-generation-no-external-ai-calls-that-produces-context-aware-branching-responses-based-on-the-player-s-input-including-tone-management-for-the-character-e-g-easily-annoyed-rule-focused-but-capable-of-warmth-and-maintaining-consistent-continuity-across-turns",
+      "title": "Implement deterministic, offline response generation (no external AI calls) that produces context-aware branching responses based on the player’s input, including tone management for the character (e.g., easily annoyed, rule-focused, but capable of warmth) and maintaining consistent continuity across turns.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-optional-character-setting-panel-or-modal-that-describes-the-character-s-appearance-and-mannerisms-in-original-wording-not-copied-from-any-source-and-does-not-claim-to-be-sourced-from-online-lookup-keep-the-character-name-configurable-in-ui-default-to-an-original-name-to-avoid-hard-dependency-on-copyrighted-ip",
+      "title": "Add an optional “Character & Setting” panel (or modal) that describes the character’s appearance and mannerisms in original wording (not copied from any source) and does not claim to be sourced from online lookup; keep the character name configurable in UI (default to an original name) to avoid hard dependency on copyrighted IP.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-distinctive-visual-theme-for-the-game-typography-color-palette-layout-consistent-across-screens-and-components-suitable-for-a-playful-retro-interactive-fiction-vibe-avoid-default-blue-purple-heavy-styling",
+      "title": "Apply a coherent, distinctive visual theme for the game (typography, color palette, layout) consistent across screens and components, suitable for a playful retro interactive-fiction vibe (avoid default blue/purple-heavy styling).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-to-the-project-and-render-them-in-the-ui-e-g-character-portrait-and-a-scene-header-background-from-frontend-public-assets-generated-do-not-serve-images-from-the-backend",
+      "title": "Add generated static images to the project and render them in the UI (e.g., character portrait and a scene/header background) from frontend/public/assets/generated; do not serve images from the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Implement a text-input date adventure game featuring Benson Dunwoody with detailed narrative and response text.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Use an OpenAI model to inform Benson's appearance/character description and to generate in-game responses.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Text-input interactive fiction date game (Benson-inspired) with detailed narrative",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

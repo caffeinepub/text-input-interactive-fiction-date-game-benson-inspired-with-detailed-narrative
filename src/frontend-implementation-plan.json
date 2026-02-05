@@ -1,0 +1,172 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Retro interactive-fiction date game (offline deterministic branching)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build the interactive fiction UI with a detailed opening scene, freeform text input, multi-turn transcript, and restart control.",
+      "acceptanceCriteria": [
+        "On first load, the game displays a multi-paragraph, detailed starting scene and prompts the player for input.",
+        "The player can type a response and submit it; the UI appends the player’s text and then appends a detailed narrative reply from the game.",
+        "The UI supports multiple turns, maintaining and displaying a scrollable transcript of the conversation/story.",
+        "There is a clear way to restart the story (e.g., a “New Game/Restart” button) that resets the transcript and state."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main game screen: header, scrollable transcript, freeform text input + submit, and a Restart/New Game action. Use shadcn-ui components (e.g., Button, Input/Textarea, Card, ScrollArea) to implement the layout and transcript container; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/GameTranscript.tsx",
+          "operation": "create",
+          "description": "Add a transcript renderer for alternating player and character messages with readable formatting and auto-scroll behavior after each turn. Use shadcn-ui components (e.g., Card, ScrollArea) to present the transcript; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/PlayerInput.tsx",
+          "operation": "create",
+          "description": "Add a controlled freeform input component with submit-on-button and optional submit-on-Enter behavior, including disabled state when the story is ended."
+        },
+        {
+          "path": "frontend/src/game/initialNarration.ts",
+          "operation": "create",
+          "description": "Add the multi-paragraph, detailed starting narration text and the initial prompt content, written as original prose and kept fully offline."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement deterministic offline branching response generation with tone/continuity state and clear endings.",
+      "acceptanceCriteria": [
+        "Game responses are generated without calling any third-party LLM/API.",
+        "Responses vary based on player input (at minimum: positive/romantic, awkward/neutral, and antagonistic/rude input paths).",
+        "The game maintains a small state (e.g., “mood/affinity”, scene/beat index) and uses it to keep continuity across turns.",
+        "At least one path can lead to a “successful date” ending and at least one to an “early end” ending; endings are clearly displayed and offer restart."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/game/types.ts",
+          "operation": "create",
+          "description": "Define frontend-only game types for transcript entries, tone flags, scene/beat identifiers, and overall game state (mood/affinity, flags, ended state) used to maintain continuity across turns."
+        },
+        {
+          "path": "frontend/src/game/responseEngine.ts",
+          "operation": "create",
+          "description": "Implement a deterministic, offline response generator that classifies player input into at least three paths (positive/romantic, awkward/neutral, antagonistic/rude), updates state (affinity/mood + beat index), and returns detailed narrative replies plus optional ending signals. Do not call any external services or backend capabilities."
+        },
+        {
+          "path": "frontend/src/game/inputClassifier.ts",
+          "operation": "create",
+          "description": "Add simple, deterministic input classification (keyword/phrase heuristics + fallback rules) to support branching without any external AI calls."
+        },
+        {
+          "path": "frontend/src/game/storyBeats.ts",
+          "operation": "create",
+          "description": "Add original story beat content (scene progression) that the response engine can reference to keep continuity (callbacks to earlier choices, consistent mannerisms, and rule-focused/annoyed/warm tone shifts). Include at least one success ending and one early-termination ending."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the offline response engine into the UI turn loop: on submit, append the player entry, compute next narrative response from the deterministic engine, update state, and handle ended states (success/early end) with an on-screen ending indicator and restart availability. Ensure no backend calls are used for response generation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add an optional Character & Setting panel/modal with original description text and configurable character name (defaulting to an original name).",
+      "acceptanceCriteria": [
+        "The app includes an original character description written in-app (not fetched) and presented to the player.",
+        "The character name shown in the UI is configurable (e.g., a setting field) with a non-copyright default.",
+        "No UI text claims that the app “looked up” the character via an AI model or external service."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CharacterSettingDialog.tsx",
+          "operation": "create",
+          "description": "Create a Character & Setting modal/panel containing: (1) an original, in-app description of the grumpy gumball machine–headed park manager vibe (no copied text, no claims of online lookup), and (2) a configurable display name field with a non-copyright default. Use shadcn-ui Dialog, Button, and Input components to implement the modal and settings controls; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/game/characterCopy.ts",
+          "operation": "create",
+          "description": "Store original character/setting description copy (appearance, mannerisms, rule-focused but capable of warmth), explicitly written to avoid referencing any external lookup or copyrighted sources."
+        },
+        {
+          "path": "frontend/src/hooks/useGameSettings.ts",
+          "operation": "create",
+          "description": "Add a small settings hook to manage the configurable character name (and optionally persist to localStorage), exposing getters/setters used by the UI and response engine."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the Character & Setting dialog into the main UI (e.g., a header button), and ensure the chosen character name is used across the transcript and narration."
+        },
+        {
+          "path": "frontend/src/game/responseEngine.ts",
+          "operation": "modify",
+          "description": "Update response generation to use the configurable character name from settings and to keep all wording original, with no references to external services."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Apply a cohesive retro interactive-fiction theme across the game UI (typography, palette, layout) avoiding default blue/purple-heavy styling.",
+      "acceptanceCriteria": [
+        "The game has a consistent theme across header, transcript, input area, and buttons.",
+        "The theme is readable (sufficient contrast) and feels intentionally styled (not plain default)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global styles and CSS variables for a warm retro palette (paper/ink feel, warm accent colors) and readable typography; ensure consistent styling for background, text, cards, inputs, and buttons without default blue/purple-heavy appearance."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions as needed to support the retro vibe (e.g., font families and custom named colors tied to CSS variables) while keeping styling consistent across components."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Apply the theme consistently in the layout (header, transcript container, input area, buttons) using Tailwind utility classes and the app’s CSS variables so the UI looks intentionally designed."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add the required generated static images under frontend/public/assets/generated and render them in the UI without backend image serving.",
+      "acceptanceCriteria": [
+        "The required generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
+        "Images load correctly in production build without any backend image endpoints."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/benson-inspired-portrait.dim_768x768.png",
+          "operation": "create",
+          "description": "Add the generated character portrait image asset at the exact path frontend/public/assets/generated/benson-inspired-portrait.dim_768x768.png for direct frontend use."
+        },
+        {
+          "path": "frontend/public/assets/generated/park-date-scene-bg.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated scene background image asset at the exact path frontend/public/assets/generated/park-date-scene-bg.dim_1600x900.png for direct frontend use."
+        },
+        {
+          "path": "frontend/src/components/GameHeader.tsx",
+          "operation": "create",
+          "description": "Create a header component that renders the background image (frontend/public/assets/generated/park-date-scene-bg.dim_1600x900.png) in a styled header area and shows the current configurable character name plus access to settings. Use shadcn-ui components (e.g., Button) where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/CharacterPortrait.tsx",
+          "operation": "create",
+          "description": "Create a small portrait component that displays frontend/public/assets/generated/benson-inspired-portrait.dim_768x768.png alongside the transcript or in the Character & Setting modal."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the new GameHeader and CharacterPortrait components into the main UI so both required generated images are actually rendered from frontend/public/assets/generated and not served via any backend capability."
+        }
+      ]
+    }
+  ]
+}

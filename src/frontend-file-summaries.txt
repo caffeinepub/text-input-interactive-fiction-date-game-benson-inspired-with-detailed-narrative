@@ -1,0 +1,17 @@
+{
+  "frontend/src/index.css": "Global styles with warm retro paper/ink OKLCH color palette and serif typography for an interactive fiction aesthetic.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with Georgia serif font family and retro-themed color tokens.",
+  "frontend/src/game/types.ts": "TypeScript interfaces for game state, transcript entries, tone categories, and initial state definition.",
+  "frontend/src/game/characterCopy.ts": "Original character and setting descriptions with configurable character name (default: Bennett).",
+  "frontend/src/game/initialNarration.ts": "Detailed opening narration and initial prompt for the date scenario.",
+  "frontend/src/game/inputClassifier.ts": "Deterministic keyword-based classifier that categorizes player input into positive, neutral, or negative tones.",
+  "frontend/src/game/storyBeats.ts": "Story progression beats with branching responses, affinity changes, and ending narration based on player choices.",
+  "frontend/src/game/responseEngine.ts": "Offline response generator that processes player input, updates game state, and returns contextual narrative responses.",
+  "frontend/src/hooks/useGameSettings.ts": "Custom hook for managing and persisting character name settings to localStorage.",
+  "frontend/src/components/GameHeader.tsx": "Header component displaying the park scene background image, character name, and settings button.",
+  "frontend/src/components/CharacterPortrait.tsx": "Reusable component rendering the character portrait image in a styled circular frame.",
+  "frontend/src/components/CharacterSettingDialog.tsx": "Modal dialog for viewing character/setting descriptions and customizing the character name.",
+  "frontend/src/components/GameTranscript.tsx": "Scrollable transcript display showing alternating player and character messages with auto-scroll.",
+  "frontend/src/components/PlayerInput.tsx": "Text input component with submit button, keyboard shortcuts, and disabled state handling.",
+  "frontend/src/App.tsx": "Main application component orchestrating game state, transcript management, and UI composition with restart functionality."
+}
